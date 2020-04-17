@@ -1,0 +1,3 @@
+
+class BaseTypeError(TypeError):
+    pass
