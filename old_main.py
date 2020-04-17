@@ -43,7 +43,6 @@ def get_ambient_r_data():
 
 def submit_to_database():
     '''add all the relivant data into the database'''
-    con = psycopg2.connect(dbname="Tomato_Growth", user="tomatopi", password="68Uk%&*SLiaUSb0tLu", host="db.cooper.coop")
     now = datetime.datetime.now()
     cur = con.cursor()
 
