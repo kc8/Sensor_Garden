@@ -1,4 +1,4 @@
-from soil_temperatures import Temperature
+from sensors import SoilMoisture, GPIOPins,Temperature
 
 temp = Temperature(device_file="28-0316b09095ff")
 
@@ -11,3 +11,15 @@ temp = Temperature(device_file="28-0316b09095ff")
 
 """
 print(temp.get_temperature())
+
+
+"""
+    ADC pins for the GPIO. 
+    transistor_pin_0 = 26
+    transistor_pin_1 = 16
+    adc_channels are 1,0
+"""
+
+pins = GPIOPins((26, 16))
+soil_one = SoilMoisture(2, 0, pins)
+print(soil_one.read_values())

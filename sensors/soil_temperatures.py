@@ -1,7 +1,6 @@
 import os
 import glob
-import time
-from exceptions import BaseTypeError
+from sensors.exceptions import BaseTypeError
 
 
 """
@@ -30,10 +29,10 @@ class Temperature:
         """
         self._device_file = device_file
         self._probe_directory = probe_directory
-        self._temp = None # init but it will be none until invoke method to read
+        self._temp = None  # init but it will be none until invoke method to read
         self._base_dir = base_dir
-        self._device = None # Setup in self._setup_devices()
-        self._setup_devices() # We need to setup the devices in order to use them
+        self._device = None  # Setup in self._setup_devices()
+        self._setup_devices()  # We need to setup the devices in order to use them
 
     def __cmp__(self, other):
         """
@@ -57,21 +56,12 @@ class Temperature:
         if not isinstance(self._probe_directory, str):
             raise BaseTypeError
 
-        # Need to change some OS level settings,
-        # To-DO: Check to make sure these work properly and what errors we may need to handle
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
 
         self._device_path = glob.glob(self._base_dir + self._device_file)[0]
         # Below is now the device needed to reference for the sensor:
         self._device = self._device_path + self._probe_directory
-
-    def _read_temp_raw(self):
-        """
-        Reads the raw data from the temperature probe
-        :arg
-        :return:
-        """
 
     def _read_temp(self):
         """
@@ -81,8 +71,6 @@ class Temperature:
         with open(self._device, 'r') as f:
             lines = f.readlines()
             f.close()
-        #if lines[0].strip()[-3:] != 'YES':
-        #    self.temp = lines[0].strip()[-3:]
         equals_pos = lines[1].find('t=')
         if equals_pos != -1:
             self._temp = lines[1][equals_pos+2:]
@@ -107,7 +95,7 @@ class Temperature:
         :return: Returns the temperature of the probe in Fahrenheit
         """
         self._read_temp()
-        if self._temp == None:
+        if self._temp is None:
             return None
         self._temp = self.convert_temperature_measurement('f')
         return self._temp
