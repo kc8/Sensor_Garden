@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/observer/abc_observer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/observer/abc_subject.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/observer/abc_observable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file_testing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/observer/observer.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/observer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/observer/abc_observer.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/abc_observer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/observer/abc_subject.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/abc_subject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/observer/observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/synchronization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/update_firestore.py" beforeDir="false" afterPath="$PROJECT_DIR$/update_firestore.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +100,8 @@
       <workItem from="1587069783075" duration="334000" />
       <workItem from="1587070126277" duration="6937000" />
       <workItem from="1587124630935" duration="1843000" />
-      <workItem from="1587210117629" duration="15420000" />
+      <workItem from="1587210117629" duration="16139000" />
+      <workItem from="1587337720960" duration="5720000" />
     </task>
     <servers />
   </component>

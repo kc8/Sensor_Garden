@@ -1,3 +1,9 @@
+#Custom Ignore files below
+
+old_main.py
+
+
+#Template
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

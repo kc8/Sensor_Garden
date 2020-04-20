@@ -5,11 +5,19 @@ class Observer(metaclass=abc.ABCMeta):
     
     @abc.abstractmethod
     def update(self, value):
+        """ """
+        pass
+
+    @abc.abstractmethod
+    def error(self):
+        """What to do on error"""
         pass
 
     def __enter__(self):
+        """For context manager"""
         return self
 
-    @abc.abstractmethod
+    #s@abc.abstractmethod
     def __exit__(self, exc_type, exc_val, exc_tb):
+        """For context manager"""
         pass
