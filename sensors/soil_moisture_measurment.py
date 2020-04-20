@@ -75,5 +75,5 @@ class SoilMoisture(Observable):
         """
         new_value = self.read_values()
         if self._prior_value != new_value:
-            self.notify(new_value)
+            self.notify(value=new_value, opts=object_sensor_to_update)
             self._prior_value = new_value

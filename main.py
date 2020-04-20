@@ -49,7 +49,7 @@ class SensorReadings(Observable):
 
         #self._trigger_update(_readings)
 
-    def _trigger_update(self, value):
+    def _trigger_update(self, value, opts):
         self.notify(value=value)
 
 

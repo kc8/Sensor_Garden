@@ -32,14 +32,18 @@ class UpdateFirestore(Observer):
         self._client = ""
         self._setup_creds()
 
-    def update(self, arg):
-       doc_ref = self._client.collection()
+    def update(self, arg, opts):
+        data = {
+            opts: arg
+        }
+
+        self._client.collection("tom_plant_sensor_reading").document("readings").set(data)
 
     def error(self):
         pass
 
 
-class SendWaterEmail(Observer):
+class SendEmail(Observer):
     """
     Class used to receive a notiftication to send an email about a subject
 
@@ -48,7 +52,7 @@ class SendWaterEmail(Observer):
     def __init__(self):
         Observer.__init__(self)
 
-    def update(self, arg):
+    def update(self, vale, opts=None):
         pass
 
     def error(self):

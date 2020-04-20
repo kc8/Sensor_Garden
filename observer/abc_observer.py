@@ -5,7 +5,7 @@ class Observer(metaclass=abc.ABCMeta):
     __metaclass_ = abc.ABCMeta
     
     @abc.abstractmethod
-    def update(self, value):
+    def update(self, value, opts=None):
         """ """
         pass
 

@@ -21,14 +21,14 @@ class Observable(metaclass=ABCMeta):
         except:
             raise FailedToRemoveObserver("Failed to remove observer: {}".format(observer))
 
-    def notify(self, value=None):
+    def notify(self, value=None, opts=None):
         """Notifies all observers of changes
         """
         for observer in self._observers:
             if value is None:
                 observer.update()
             else:
-                observer.update(value)
+                observer.update(value, opts)
 
     def __enter__(self):
         return self
