@@ -2,7 +2,7 @@
 
 from abc import ABCMeta
 from observer.abc_observer import Observer
-from observer.exceptions import FailedtoRemoveObserver
+from observer.exceptions import FailedToRemoveObserver
 
 
 class Observable(metaclass=ABCMeta):
@@ -19,7 +19,7 @@ class Observable(metaclass=ABCMeta):
         try:
             self._observers -= {observer}
         except:
-            raise FailedtoRemoveObserver("Failed to remove observer: {}".format(observer))
+            raise FailedToRemoveObserver("Failed to remove observer: {}".format(observer))
 
     def notify(self, value=None):
         """Notifies all observers of changes

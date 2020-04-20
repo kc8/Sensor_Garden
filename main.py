@@ -1,9 +1,10 @@
-from sensors import AmbientSensor
+from sensors import AmbientSensor, Temperature, GPIOPins, SoilMoisture
 from observer import Observable
-from update_firestore import UpdateFirestore
-
+from updaters import UpdateFirestore
 from observer import Observer
 
+
+"""Example Observer for reference"""
 class UpdatePostgres(Observer):
 
     def __init__(self):
@@ -20,56 +21,54 @@ class SensorReadings(Observable):
 
     def __init__(self):
         Observable.__init__(self)
-        self.ambient_sens_temp = ""
+        # Soil moisture content:
+        self.soil_moisture_plant_1 = ""
+        self.soil_moisture_plant_2 = ""
+        # Soil temperature from plants
+        self.soil_temp_plant_1 = ""
+        self.soil_temp_plant_2 = ""
+        # From BME200 sensor/ ambient sensor readings:
+        self.ambient_temp = ""
+        self.ambient_humidity = ""
+        self.ambient_pressure = ""
+        # Soil temperature from plants
+
+    def ambient_sensor_refresh(self):
+        ambient_readings = AmbientSensor()
+        self.ambient_temp = ambient_readings.get_temp()
+        self.ambient_humidity = ambient_readings.get_humidity()
+        self.ambient_pressure = ambient_readings.get_pressure()
+
+    def soil_moisture_refresh(self):
+        """Reads the soil moisture content from both plants"""
+        pins = GPIOPins((26, 16))
+        soil_moisture_plant_1_device = SoilMoisture(1, 0, pins)
+        soil_moisture_plant_2_device = SoilMoisture(2, 0, pins)
+        self.soil_moisture_plant_1 = soil_moisture_plant_1_device.read_values()
+        self.soil_moisture_plant_2 = soil_moisture_plant_2_device.read_values()
+
+    def soil_temperature_refresh(self):
+        soil_temp_1_device = Temperature(device_file="28-0316b09095ff")
+        soil_temp_2_device = Temperature(device_file="28-0516b045b5ff")
+        self.soil_temp_plant_1 = soil_temp_1_device.get_temperature()
+        self.soil_temp_plant_2 = soil_temp_2_device.get_temperature()
 
     def data_refresh(self):
-        ambient_readings = AmbientSensor()
-        self.ambient_sens_temp = ambient_readings.get_temp()
+        """Callss all the update methods to check for new values"""
+        # 1. Update new values with methods and set.
+        # 2. Check each one against old values
+        # 2.3. Call trigger_update if there is a change in the value
+        value = "Test"
+        self._trigger_update(value)
 
-    def trigger_update(self):
-        self.data_refresh()
-        self.notify(value=self.ambient_sens_temp)
-
-sr = SensorReadings()
-uf = UpdateFirestore()
-sr.add(uf)
-sr.trigger_update()
+    def _trigger_update(self, value):
+        self.notify(value=value)
 
 
-#---------------------Sensor testing ------------------------#
-#device_file: str, device_folder: str,
-"""        device_folder_tom0 = glob.glob(base_dir + '28-0316b09095ff')[0]
-        device_folder_tom1 = glob.glob(base_dir + '28-0516b045b5ff')[0]
-        device_file_tom0 = device_folder_tom0 + '/w1_slave'
-        device_file_tom1 = device_folder_tom1 + '/w1_slave'
+if __name__ == '__main__':
+    sensor_readings_observable = SensorReadings()
+    firestore_observer = UpdateFirestore()
+    sensor_readings_observable.add(firestore_observer)
+    sensor_readings_observable.data_refresh()
 
 
-"""
-#Temperature readings.
-#temp = Temperature(device_file="28-0316b09095ff")
-#print("---")
-#print(temp.get_temperature())
-
-
-"""
-    ADC pins for the GPIO. 
-    transistor_pin_0 = 26
-    transistor_pin_1 = 16
-    adc_channels are 1,0
-"""
-#print("---")
-# Moisture readings
-#pins = GPIOPins((26, 16))
-#soil_one = SoilMoisture(2, 0, pins)
-#print(soil_one.read_values())
-
-#Ambident sensors
-ambient_readings = AmbientSensor()
-#print("---")
-# There is a bug in the source code from Adafruit for this module. You need to call the temp
-# method first in order to get the rest of the readings. The temp method seems to be
-# the only function that creates an object that is required to read. This is a deprecetated library
-# that I am using so not going to bother fixing.
-#print(ambient_readings.get_temp())
-#print(ambient_readings.get_humidity())
-#print(ambient_readings.get_pressure())

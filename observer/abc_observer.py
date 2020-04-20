@@ -1,5 +1,6 @@
 import abc
 
+
 class Observer(metaclass=abc.ABCMeta):
     __metaclass_ = abc.ABCMeta
     
@@ -17,7 +18,7 @@ class Observer(metaclass=abc.ABCMeta):
         """For context manager"""
         return self
 
-    #s@abc.abstractmethod
+    # @abc.abstractmethod # Not ready for implementation
     def __exit__(self, exc_type, exc_val, exc_tb):
         """For context manager"""
         pass
