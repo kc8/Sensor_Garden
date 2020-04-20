@@ -1,6 +1,7 @@
 #Custom Ignore files below
 
 old_main.py
+secrets.json
 
 
 #Template

@@ -2,3 +2,4 @@ from sensors.soil_moisture_measurment import SoilMoisture
 from sensors.gpio_pin_config import GPIOPins
 from sensors.soil_temperatures import Temperature
 from sensors.ambient_sensor import AmbientSensor
+from observer import Observable

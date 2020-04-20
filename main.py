@@ -3,20 +3,8 @@ from observer import Observable
 from updaters import UpdateFirestore
 from observer import Observer
 
-
-"""Example Observer for reference"""
-class UpdatePostgres(Observer):
-
-    def __init__(self):
-        Observer.__init__(self)
-
-    def update(self, arg):
-        print(arg)
-
-    def error(self):
-        pass
-
-
+# To-Do: Need to think of a better way to handle these updates rather than just one
+#     large Class
 class SensorReadings(Observable):
 
     def __init__(self):
@@ -58,17 +46,35 @@ class SensorReadings(Observable):
         # 1. Update new values with methods and set.
         # 2. Check each one against old values
         # 2.3. Call trigger_update if there is a change in the value
-        value = "Test"
-        self._trigger_update(value)
+
+        #self._trigger_update(_readings)
 
     def _trigger_update(self, value):
         self.notify(value=value)
 
 
 if __name__ == '__main__':
-    sensor_readings_observable = SensorReadings()
+    # The names of the sensors which are also the columns, fields IDs, or names  in our observers
+    sensor_names = [
+        "soil_moisture_plant_1",
+        "soil_moisture_plant_2",
+        "soil_temp_plant_1",
+        "soil_temp_plant_2",
+        "ambient_temp" ,
+        "ambient_humidity",
+        "ambient_pressure",
+    ]
+    # Create the soil mositure temperature observable
+    soil_gpio_pins = GPIOPins((26, 16))
+    soil_moisture_plant_1_observable = SoilMoisture(1, 0, soil_gpio_pins)
+    soil_moisture_plant_2_observable = SoilMoisture(2, 0, soil_gpio_pins)
+    # Create Observers:
     firestore_observer = UpdateFirestore()
-    sensor_readings_observable.add(firestore_observer)
-    sensor_readings_observable.data_refresh()
+    # Add observers to observables for notification
+    soil_moisture_plant_2_observable.add(firestore_observer)
+    soil_moisture_plant_1_observable.add(firestore_observer)
+    while True:
+        soil_moisture_plant_1_observable.data_refresh(sensor_names[0])
+        soil_moisture_plant_2_observable.data_refresh(sensor_names[1])
 
 

@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/updaters/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/updaters/updates.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/observer/abc_observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/abc_observable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/observer/abc_observer.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/abc_observer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/observer/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/observer/abc_subject.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/observer/synchronization.py" beforeDir="false" afterPath="$PROJECT_DIR$/observer/synchronization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sensors/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update_firestore.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/ambient_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/ambient_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/soil_moisture_measurment.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/soil_moisture_measurment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/updaters/updates.py" beforeDir="false" afterPath="$PROJECT_DIR$/updaters/updates.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
       <workItem from="1587124630935" duration="1843000" />
       <workItem from="1587210117629" duration="16139000" />
       <workItem from="1587337720960" duration="6483000" />
-      <workItem from="1587384722844" duration="2231000" />
+      <workItem from="1587384722844" duration="9089000" />
     </task>
     <servers />
   </component>

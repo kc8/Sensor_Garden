@@ -2,9 +2,10 @@ import RPi.GPIO as GPIO
 from .exceptions import ADCChannelError
 from .gpio_pin_config import GPIOPins
 from Adafruit_ADS1x15 import ADS1015
+from sensors import Observable
 
 
-class SoilMoisture:
+class SoilMoisture(Observable):
 
     def __init__(self, read_times: int, adc_channel: int, GPIO_pins: object, gain=1):
         """
@@ -27,6 +28,7 @@ class SoilMoisture:
             raise ADCChannelError("Error creating ADC channel value must be between 0 - 3")
         self._gpio_pins_obj = GPIO_pins
         self._gpio_pins = []
+        self._prior_value = ""
 
     def _setup_gpio_pins(self):
         """
@@ -64,3 +66,14 @@ class SoilMoisture:
 
         GPIO.cleanup()
         return _sub_total/self._read_times
+
+    def data_refresh(self, object_sensor_to_update=""):
+        """
+        :arg: object_sensor_to_update: this is the name of the sensor specific to the object
+        Refreshes the sensor data and notifies observers if needed
+        :return: void
+        """
+        new_value = self.read_values()
+        if self._prior_value != new_value:
+            self.notify(new_value)
+            self._prior_value = new_value
