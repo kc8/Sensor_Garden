@@ -21,9 +21,10 @@ class SensorReadings(Observable):
     def __init__(self):
         Observable.__init__(self)
         self.ambient_sens_temp = ""
+
     def data_refresh(self):
         ambient_readings = AmbientSensor()
-        self.ambient_sens_temp= ambient_readings.get_temp()
+        self.ambient_sens_temp = ambient_readings.get_temp()
 
     def trigger_update(self):
         self.data_refresh()
@@ -31,9 +32,7 @@ class SensorReadings(Observable):
 
 sr = SensorReadings()
 uf = UpdateFirestore()
-up = UpdatePostgres()
 sr.add(uf)
-sr.add(up)
 sr.trigger_update()
 
 
