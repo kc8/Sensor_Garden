@@ -1,6 +1,6 @@
 import os
 import glob
-from sensors.exceptions import BaseTypeError
+from .exceptions import BaseTypeError
 
 
 """

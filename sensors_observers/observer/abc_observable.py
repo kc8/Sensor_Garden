@@ -1,8 +1,8 @@
 """Observable or also the Publisher or Subject method"""
 
 from abc import ABCMeta
-from observer.abc_observer import Observer
-from observer.exceptions import FailedToRemoveObserver
+from .abc_observer import Observer
+from .exceptions import FailedToRemoveObserver
 
 
 class Observable(metaclass=ABCMeta):

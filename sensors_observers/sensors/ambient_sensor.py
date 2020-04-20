@@ -1,5 +1,5 @@
 from Adafruit_BME280 import *
-from sensors import Observable
+from sensors_observers.observer import Observable
 
 
 class AmbientSensor(Observable):

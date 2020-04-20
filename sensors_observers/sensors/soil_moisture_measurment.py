@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from .exceptions import ADCChannelError
 from .gpio_pin_config import GPIOPins
 from Adafruit_ADS1x15 import ADS1015
-from sensors import Observable
+from sensors_observers.observer import Observable
 
 
 class SoilMoisture(Observable):
@@ -18,6 +18,7 @@ class SoilMoisture(Observable):
             :gain: Default 1. The ADC gain error is is an offset error calculation
 
         """
+        Observable.__init__(self)
         self._gain = gain
         self._read_times = read_times
         self._soil_moisture_content = None
@@ -28,7 +29,7 @@ class SoilMoisture(Observable):
             raise ADCChannelError("Error creating ADC channel value must be between 0 - 3")
         self._gpio_pins_obj = GPIO_pins
         self._gpio_pins = []
-        self._prior_value = ""
+        self._prior_value = 9999
 
     def _setup_gpio_pins(self):
         """
@@ -74,6 +75,7 @@ class SoilMoisture(Observable):
         :return: void
         """
         new_value = self.read_values()
-        if self._prior_value != new_value:
-            self.notify(value=new_value, opts=object_sensor_to_update)
+        if new_value-100 <= self._prior_value >= new_value+100:
             self._prior_value = new_value
+            self.notify(value=new_value, opts=object_sensor_to_update)
+
