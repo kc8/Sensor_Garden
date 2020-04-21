@@ -1,8 +1,9 @@
 from sensors_observers import Observer
 
 # Imports below require firestore on device
-from google.cloud import firestore
-#import google.auth
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 class UpdatePostgres(Observer):
 
