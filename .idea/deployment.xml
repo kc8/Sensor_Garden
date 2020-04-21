@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="pi@192.168.1.75:22">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Sensor Garden .149">
     <serverData>
       <paths name="Copy of project-level server '192.168.1.140'">
         <serverdata>
@@ -9,10 +9,10 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="pi@192.168.1.75:22">
+      <paths name="Sensor Garden .149">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/pi/tom_project_2020" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/pi/sensor_garden/tom_project_2020" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

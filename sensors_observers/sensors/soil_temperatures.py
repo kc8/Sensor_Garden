@@ -1,6 +1,7 @@
 import os
 import glob
 from .exceptions import BaseTypeError
+from sensors_observers.observer import Observable
 
 
 """
@@ -16,7 +17,7 @@ here is an example of the data for the device that we need to be given:
 """
 
 
-class Temperature:
+class Temperature(Observable):
 
     def __init__(self, device_file: str, probe_directory='/w1_slave', base_dir='/sys/bus/w1/devices/'):
         """
@@ -27,12 +28,14 @@ class Temperature:
             device_file:
             base_dir: Default is '/sys/bus/w1/devices/'
         """
+        Observable.__init__(self)
         self._device_file = device_file
         self._probe_directory = probe_directory
         self._temp = None  # init but it will be none until invoke method to read
         self._base_dir = base_dir
         self._device = None  # Setup in self._setup_devices()
         self._setup_devices()  # We need to setup the devices in order to use them
+        self._prior_value = 0
 
     def __cmp__(self, other):
         """
@@ -99,3 +102,16 @@ class Temperature:
             return None
         self._temp = self.convert_temperature_measurement('f')
         return self._temp
+
+    def data_refresh(self, object_sensor_to_update=""):
+        """
+        :arg: object_sensor_to_update: this is the name of the sensor specific to the object
+        Refreshes the sensor data and notifies observers if needed
+        :return: void
+        """
+        #round()
+        self.get_temperature()
+
+        if self._temp < self._prior_value or self._prior_value < self._temp:
+            self._prior_value = self._temp
+            self.notify(value=self._temp, opts=object_sensor_to_update)
