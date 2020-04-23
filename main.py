@@ -27,8 +27,8 @@ if __name__ == '__main__':
     # soil_temp_2_observable = Temperature(device_file="") # Currently broken
     # Create ambient sensors
     ambient_temperature = AmbientTemperature()
-    ambient_humidity = AmbientPressure()
-    ambient_pressure = AmbientHumidity()
+    ambient_humidity = AmbientHumidity()
+    ambient_pressure = AmbientPressure()
     # Create Observers:
     firestore_observer = UpdateFirestore()
     # Add observers to observables for notification

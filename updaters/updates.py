@@ -37,7 +37,7 @@ class UpdateFirestore(Observer):
         self._doc_ref = self._db.collection("tom_plant_sensor_readings").document("readings")
 
     def update(self, arg, opts):
-        print(f"Updating info: {arg} with {opts}")
+        print(f"Updating info: {arg} with {opts}") # Replace with logging function to keep track of updates
         self._doc_ref.update({opts:arg})
 
     def error(self):

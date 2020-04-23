@@ -54,7 +54,6 @@ class AmbientHumidity(AmbientSensor):
 
     def get_measurement(self):
         """'''returns the current humidity reading'''"""
-        _humidity = self._sensor.read_humidity()
-        self._measurement = _humidity
+        self._measurement = self._sensor.read_humidity()
         return self._measurement
 
