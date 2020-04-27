@@ -1,3 +1,1 @@
-These are the cloud functions that allow us to access the firestore data. 
-
-These are hosted on Firebase or through Google Cloud
+Playing with various Google Cloud Products to see if I can add more features

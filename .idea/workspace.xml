@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/basic_get_function/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/basic_get_function/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/basic_get_function/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/basic_get_function/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/graphql/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/graphql/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/graphql/app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/graphql/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/graphql/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/graphql/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cloud_functions/graphql/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/pub_sub/main_pub_sub.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud_functions/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/service/start.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/updaters/updates.py" beforeDir="false" afterPath="$PROJECT_DIR$/updaters/updates.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +54,9 @@
     <property name="settings.editor.selected.configurable" value="web.server" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor" />
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\sensors_observers\sensors" />
@@ -100,6 +120,8 @@
       <workItem from="1587337720960" duration="6483000" />
       <workItem from="1587384722844" duration="23209000" />
       <workItem from="1587470788149" duration="19062000" />
+      <workItem from="1587651279739" duration="1809000" />
+      <workItem from="1587746883146" duration="6871000" />
     </task>
     <servers />
   </component>
@@ -155,10 +177,10 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1356" y="430" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.0.2560.1410/2560.11.2560.1410@0.0.2560.1410" timestamp="1587070097255" />
-    <state x="936" y="375" width="840" height="1034" key="search.everywhere.popup" timestamp="1587217744310">
+    <state x="936" y="375" width="840" height="1034" key="search.everywhere.popup" timestamp="1587683318326">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="936" y="375" width="840" height="1034" key="search.everywhere.popup/0.0.2560.1410/2560.11.2560.1410@0.0.2560.1410" timestamp="1587217744310" />
+    <state x="936" y="375" width="840" height="1034" key="search.everywhere.popup/0.0.2560.1410/2560.11.2560.1410@0.0.2560.1410" timestamp="1587683318326" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tomato_plant_sensor$Tomato_Pi.coverage" NAME="Tomato Pi Coverage Results" MODIFIED="1587479915547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

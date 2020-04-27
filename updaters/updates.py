@@ -4,6 +4,8 @@ from sensors_observers import Observer
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from google.cloud import pubsub_v1
+import json
 
 class UpdatePostgres(Observer):
 
@@ -55,6 +57,25 @@ class SendEmail(Observer):
 
     def update(self, vale, opts=None):
         pass
+
+    def error(self):
+        pass
+
+class GCloudPublisher(Observer):
+
+    def __init__(self, project_id, topic_name):
+        Observer.__init__(self)
+        self._project_id =  project_id
+        self._topic_name = topic_name
+        self.publisher = pubsub_v1.PublisherClient()
+        self.topic_path = self.publisher.topic_path(project_id, topic_name)
+
+    def update(self, arg, opts=None):
+        data = [opts, arg]
+        data = json.dumps(data).encode("utf-8")
+        future = self.publisher.publish(
+            self.topic_path, data, origin=f"{opts}", username="RpiSensor"
+        )
 
     def error(self):
         pass

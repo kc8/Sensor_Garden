@@ -2,12 +2,18 @@
 from sensors_observers.sensors import AmbientTemperature, AmbientHumidity, AmbientPressure,\
                                         Temperature, GPIOPins, SoilMoisture
 from sensors_observers.observer import Observable, Observer
-from updaters import UpdateFirestore
+from updaters import UpdateFirestore, GCloudPublisher
+import os
 
 # To-Do: Need to think of a better way to handle these updates rather than just one
 #     large Class
 
 if __name__ == '__main__':
+    # Because we are running with multiple processes we need  Python setup authentication with GCloud
+    #    As soon as main runs. TO-DO: pass in as arg instead?
+    path_to_auth = "/home/pi/sensor_garden/tom_project_2020/sensor-garden-function-auth.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path_to_auth
+
     # The names of the sensors which are also the columns, fields IDs, or names  in our observers
     sensor_names = [
         "soil_moisture_plant_1",
@@ -31,6 +37,7 @@ if __name__ == '__main__':
     ambient_pressure = AmbientPressure()
     # Create Observers:
     firestore_observer = UpdateFirestore()
+    gcloud_publisher = GCloudPublisher(project_id="tomato-sensor", topic_name="sensor-garden-readings")
     # Add observers to observables for notification
     soil_moisture_plant_2_observable.add(firestore_observer)
     soil_moisture_plant_1_observable.add(firestore_observer)
@@ -38,6 +45,13 @@ if __name__ == '__main__':
     ambient_humidity.add(firestore_observer)
     ambient_pressure.add(firestore_observer)
     ambient_temperature.add(firestore_observer)
+    # GCloud Publisher observer
+    soil_moisture_plant_2_observable.add(gcloud_publisher)
+    soil_moisture_plant_1_observable.add(gcloud_publisher)
+    soil_temp_1_observable.add(gcloud_publisher)
+    ambient_humidity.add(gcloud_publisher)
+    ambient_pressure.add(gcloud_publisher)
+    ambient_temperature.add(gcloud_publisher)
     while True:
         soil_moisture_plant_1_observable.data_refresh(sensor_names[0])
         soil_moisture_plant_2_observable.data_refresh(sensor_names[1])

@@ -1,26 +1,35 @@
-import React from 'react';
+import React, {Component, useState, useEffect} from 'react';
+import UpdateSensorData from './services/SensorData.js';
+import {ApolloClient, ApolloLink} from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
 import logo from './logo.svg';
+import Clock from './clock.js'; 
+
 import './App.css';
 
-function App() {
+const cache = new InMemoryCache();
+
+const link = new HttpLink({
+  uri: "https://tomato-sensor.ue.r.appspot.com/"
+});
+
+const client = new ApolloClient({
+  link,
+  cache
+});
+
+ function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="App">
+      <ApolloProvider client={client}>
+      <UpdateSensorData></UpdateSensorData>
+      <Clock></Clock>
+      </ApolloProvider>
+      </div>
+    );
 }
 
 export default App;
