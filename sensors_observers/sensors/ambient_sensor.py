@@ -4,13 +4,16 @@ from sensors_observers.observer import Observable
 
 class AmbientSensor(Observable):
 
-    def __init__(self):
+    def __init__(self, friendly_name=None):
         self._sensor = BME280(t_mode=BME280_OSAMPLE_8,
                               p_mode=BME280_OSAMPLE_8,
                               h_mode=BME280_OSAMPLE_8)
         self._prior_measurement = 0
         self._measurement = 0
-    # TO-DO: Create an abstract method?
+        self.opts = {}
+        self.friendly_name = friendly_name
+        # TO-DO: Create an abstract method?
+
     def get_measurement(self):
         pass
 
@@ -20,13 +23,23 @@ class AmbientSensor(Observable):
         if round(self._measurement) < round(self._prior_measurement) or \
                                     round(self._prior_measurement) < round(self._measurement):
             self._prior_measurement = self._measurement
-            self.notify(self._measurement, object_sensor_to_update)
+            self.opts = {
+                "sensor_id": object_sensor_to_update,
+                "units_of_measure" : self.unit_of_measure,
+                "measurement_precise": self._measurement,
+                "measurement_friendly": int(self._measurement),
+                "common_name": self.friendly_name
+                }
+            self.notify(self._measurement, object_sensor_to_update, kwarg_opts=self.opts)
 
 
 class AmbientTemperature(AmbientSensor):
 
-    def __init__(self):
+    def __init__(self, unit_of_measure="F", friendly_name=None):
         AmbientSensor.__init__(self)
+        self.unit_of_measure = unit_of_measure
+        self.friendly_name = friendly_name
+
 
     def get_measurement(self):
         """return temperature in fahrenheit"""
@@ -36,8 +49,10 @@ class AmbientTemperature(AmbientSensor):
 
 class AmbientPressure(AmbientSensor):
 
-    def __init__(self):
+    def __init__(self, unit_of_measure="hPa", friendly_name=None):
         AmbientSensor.__init__(self)
+        self.unit_of_measure = unit_of_measure
+        self.friendly_name = friendly_name
 
     def get_measurement(self):
         """'''returns the hectopascals (current pressure reading)'''"""
@@ -49,8 +64,10 @@ class AmbientPressure(AmbientSensor):
 
 class AmbientHumidity(AmbientSensor):
 
-    def __init__(self):
+    def __init__(self, unit_of_measure="%", friendly_name=None):
         AmbientSensor.__init__(self)
+        self.unit_of_measure = unit_of_measure
+        self.friendly_name = friendly_name
 
     def get_measurement(self):
         """'''returns the current humidity reading'''"""

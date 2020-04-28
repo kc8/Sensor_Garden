@@ -7,7 +7,7 @@ from sensors_observers.observer import Observable
 
 class SoilMoisture(Observable):
 
-    def __init__(self, read_times: int, adc_channel: int, GPIO_pins: object, gain=1):
+    def __init__(self, read_times: int, adc_channel: int, GPIO_pins: object, gain=1, friendly_name=None):
         """
         A class that reads values from an ADC which is connected to a soil moisture probe. This class
         will interpret the data to give an estimate of the moisture content in the water.
@@ -30,6 +30,8 @@ class SoilMoisture(Observable):
         self._gpio_pins_obj = GPIO_pins
         self._gpio_pins = []
         self._prior_value = 9999
+        self.friendly_name = friendly_name
+        self.opts = {}
 
     def _setup_gpio_pins(self):
         """
@@ -77,5 +79,12 @@ class SoilMoisture(Observable):
         new_value = self.read_values()
         if new_value-100 <= self._prior_value >= new_value+100:
             self._prior_value = new_value
-            self.notify(value=new_value, opts=object_sensor_to_update)
+            self.opts = {
+                "sensor_id": object_sensor_to_update,
+                "units_of_measure" : "moisture",
+                "measurement_precise": new_value,
+                "measurement_friendly": int(new_value),
+                "common_name": self.friendly_name
+            }
+            self.notify(value=new_value, opts=object_sensor_to_update, kwarg_opts=self.opts)
 

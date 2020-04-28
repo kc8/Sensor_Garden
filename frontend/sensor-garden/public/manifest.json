@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sensor Garden",
+  "name": "Sensor Garden, watch the garden grow",
   "icons": [
     {
       "src": "favicon.ico",

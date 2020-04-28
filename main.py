@@ -2,7 +2,7 @@
 from sensors_observers.sensors import AmbientTemperature, AmbientHumidity, AmbientPressure,\
                                         Temperature, GPIOPins, SoilMoisture
 from sensors_observers.observer import Observable, Observer
-from updaters import UpdateFirestore, GCloudPublisher
+from updaters import UpdateFirestore, GCloudPublisher, UpdateFirestoreFilteredData
 import os
 
 # To-Do: Need to think of a better way to handle these updates rather than just one
@@ -26,17 +26,20 @@ if __name__ == '__main__':
     ]
     # Create the soil mositure temperature observable
     soil_gpio_pins = GPIOPins((26, 16))
-    soil_moisture_plant_1_observable = SoilMoisture(read_times=4, adc_channel=1, GPIO_pins=soil_gpio_pins)
-    soil_moisture_plant_2_observable = SoilMoisture(read_times=4, adc_channel=2, GPIO_pins=soil_gpio_pins)
+    soil_moisture_plant_1_observable = SoilMoisture(read_times=4, adc_channel=1, GPIO_pins=soil_gpio_pins,
+                                                    friendly_name="Soil Moisture Plant 1")
+    soil_moisture_plant_2_observable = SoilMoisture(read_times=4, adc_channel=2, GPIO_pins=soil_gpio_pins,
+                                                    friendly_name="Soil Moisture Plant 2")
     # Create soil temperature
-    soil_temp_1_observable = Temperature(device_file="28-0316b09095ff")
+    soil_temp_1_observable = Temperature(device_file="28-0316b09095ff", friendly_name="Soil Temperature Plant 1")
     # soil_temp_2_observable = Temperature(device_file="") # Currently broken
     # Create ambient sensors
-    ambient_temperature = AmbientTemperature()
-    ambient_humidity = AmbientHumidity()
-    ambient_pressure = AmbientPressure()
+    ambient_temperature = AmbientTemperature(friendly_name="Ambient Temperature")
+    ambient_humidity = AmbientHumidity(friendly_name="Ambient Humidity")
+    ambient_pressure = AmbientPressure(friendly_name="Ambient Pressure")
     # Create Observers:
     firestore_observer = UpdateFirestore()
+    firestore_observer_filtered_data = UpdateFirestoreFilteredData()
     gcloud_publisher = GCloudPublisher(project_id="tomato-sensor", topic_name="sensor-garden-readings")
     # Add observers to observables for notification
     soil_moisture_plant_2_observable.add(firestore_observer)
@@ -52,6 +55,10 @@ if __name__ == '__main__':
     ambient_humidity.add(gcloud_publisher)
     ambient_pressure.add(gcloud_publisher)
     ambient_temperature.add(gcloud_publisher)
+    # FirestoreFiltered Data Update
+    soil_moisture_plant_1_observable.add(firestore_observer_filtered_data)
+    soil_moisture_plant_2_observable.add(firestore_observer_filtered_data)
+    soil_temp_1_observable.add(firestore_observer_filtered_data)
     while True:
         soil_moisture_plant_1_observable.data_refresh(sensor_names[0])
         soil_moisture_plant_2_observable.data_refresh(sensor_names[1])

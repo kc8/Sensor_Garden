@@ -19,7 +19,9 @@ here is an example of the data for the device that we need to be given:
 
 class Temperature(Observable):
 
-    def __init__(self, device_file: str, probe_directory='/w1_slave', base_dir='/sys/bus/w1/devices/'):
+    def __init__(self, device_file: str, probe_directory='/w1_slave',
+                base_dir='/sys/bus/w1/devices/',
+                friendly_name=None):
         """
         You will need to pass this object the serial ID of the temperature probe. Please read the documentation
         on how to find this value
@@ -36,6 +38,8 @@ class Temperature(Observable):
         self._device = None  # Setup in self._setup_devices()
         self._setup_devices()  # We need to setup the devices in order to use them
         self._prior_value = 0
+        self.opts = {}
+        self.friendly_name = friendly_name
 
     def __cmp__(self, other):
         """
@@ -114,4 +118,11 @@ class Temperature(Observable):
 
         if self._temp < self._prior_value or self._prior_value < self._temp:
             self._prior_value = self._temp
-            self.notify(value=self._temp, opts=object_sensor_to_update)
+            self.opts = {
+                "sensor_id": object_sensor_to_update,
+                "units_of_measure": "F",
+                "measurement_precise": self._temp,
+                "measurement_friendly": int(self._temp),
+                "common_name": self.friendly_name
+            }
+            self.notify(value=self._temp, opts=object_sensor_to_update, kwarg_opts=self.opts)
