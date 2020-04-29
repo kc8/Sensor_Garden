@@ -7,6 +7,7 @@ old_sensor_class.py
 .idea/
 sensor-garden-function-auth.json
 sensor_garden_cloud_project_auth.json
+/build
 
 
 # NodeJS template
