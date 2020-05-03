@@ -70,7 +70,7 @@ class SoilMoisture(Observable):
         GPIO.cleanup()
         return _sub_total/self._read_times
 
-    def _calculate_percent(self, voltage, reference_voltage="3300"):
+    def _calculate_percent(self, voltage, reference_voltage=3300):
         """
         Caclulates the % of moisture where the reference voltage is the whole and the voltage is the part
         :param voltage: part or voltage being read
