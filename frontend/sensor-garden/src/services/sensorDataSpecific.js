@@ -10,7 +10,6 @@ const cache = new InMemoryCache();
 
 const link = new HttpLink({
   uri: "https://tomato-sensor.ue.r.appspot.com/"
-  //uri: "http://127.0.0.1:8080/"
 })
 
 const defaultOptions  = {

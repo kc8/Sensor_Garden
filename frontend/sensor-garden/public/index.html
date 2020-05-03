@@ -9,14 +9,36 @@
       name="Live Data for Growing Tomatoes"
       content="Live sensor data for the growth of Tomatoes including soil temperature, moisture and more!"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!-- Currently broken: <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Sensor Garden</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+      <div id="root"></div>
+    
+      <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>  
+      <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+      <script>
+    
+        var firebaseConfig = {
+          apiKey: "AIzaSyCffLWr0WH2f9g7AVBQLwuYYas_tb2Qg5I",
+          authDomain: "tomato-sensor.firebaseapp.com",
+          databaseURL: "https://tomato-sensor.firebaseio.com",
+          projectId: "tomato-sensor",
+          storageBucket: "tomato-sensor.appspot.com",
+          messagingSenderId: "246124493357",
+          appId: "1:246124493357:web:3c1d51d4bb026e73a956a4",
+          measurementId: "G-6H9RQFWETJ"
+        };
+      
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+      </script>
   </body>
 </html>

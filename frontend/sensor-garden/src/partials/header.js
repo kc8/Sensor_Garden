@@ -18,26 +18,23 @@ Future Responsive menu:
 function Header() {
     return (
       <div>
-      <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="">
-            <img src="" width="112" height="28"></img>
-          </a>
-        </div>
+      <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
       <div id="navbar" className="navbar-menu">
         <div className="navbar-start">
           <a className="navbar-item is-size-4" href='/'>
             Home
           </a>
-              <a className="navbar-item is-size-4" href='/about'>
-                About
-              </a>
+          <a className="navbar-item is-size-4" href='/about'>
+            About
+          </a>
+          <a className="navbar-item is-size-4" href='/'>
+            Live Data
+          </a>
         </div>
-
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
+              <a className="button is-primary" href='/accounts/signup'>
                 <strong>Sign up</strong>
               </a>
               <a className="button is-light">

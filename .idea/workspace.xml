@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/partials/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/partials/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/services/SensorData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/staticPages/about.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/water_plant.py" beforeDir="false" afterPath="$PROJECT_DIR$/watering_operation/water_plant.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +43,15 @@
     <property name="settings.editor.selected.configurable" value="web.server" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\watering_operation" />
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor" />
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\sensors_observers\sensors" />
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\sensors_observers" />
       <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\sensors" />
-      <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor\observer" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle_\Documents\PyCharm_Projects\tomato_plant_sensor" />
     </key>
   </component>
   <component name="RunManager">
@@ -107,7 +113,8 @@
       <workItem from="1587746883146" duration="6871000" />
       <workItem from="1587997125023" duration="5717000" />
       <workItem from="1588082265070" duration="1680000" />
-      <workItem from="1588462716665" duration="3585000" />
+      <workItem from="1588462716665" duration="4224000" />
+      <workItem from="1588507489049" duration="1051000" />
     </task>
     <servers />
   </component>
