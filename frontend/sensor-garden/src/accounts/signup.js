@@ -1,5 +1,5 @@
 import React from 'react';
-import fireAuthUI from './firebase_config.js'
+//import fireAuthUI from './firebase_config.js'
 
 
 
