@@ -90,7 +90,7 @@ class SoilMoisture(Observable):
             self._prior_value = new_value
             self.opts = {
                 "sensor_id": object_sensor_to_update,
-                "units_of_measure" : "moisture",
+                "units_of_measure" : "% Saturation",
                 "measurement_precise": new_value,
                 "measurement_friendly": int(self._calculate_percent(new_value)),
                 "common_name": self.friendly_name

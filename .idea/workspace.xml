@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +107,7 @@
       <workItem from="1587746883146" duration="6871000" />
       <workItem from="1587997125023" duration="5717000" />
       <workItem from="1588082265070" duration="1680000" />
-      <workItem from="1588462716665" duration="3496000" />
+      <workItem from="1588462716665" duration="3585000" />
     </task>
     <servers />
   </component>
