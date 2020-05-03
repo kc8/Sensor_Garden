@@ -32,7 +32,7 @@ if __name__ == '__main__':
                                                     friendly_name="Soil Moisture Plant 2")
     # Create soil temperature
     soil_temp_1_observable = Temperature(device_file="28-0316b09095ff", friendly_name="Soil Temperature Plant 1")
-    # soil_temp_2_observable = Temperature(device_file="") # Currently broken
+    soil_temp_2_observable = Temperature(device_file="28-0516b045b5ff", friendly_name="Soil Temperature Plant 2")
     # Create ambient sensors
     ambient_temperature = AmbientTemperature(friendly_name="Ambient Temperature")
     ambient_humidity = AmbientHumidity(friendly_name="Ambient Humidity")
@@ -45,6 +45,7 @@ if __name__ == '__main__':
     soil_moisture_plant_2_observable.add(firestore_observer)
     soil_moisture_plant_1_observable.add(firestore_observer)
     soil_temp_1_observable.add(firestore_observer)
+    soil_temp_2_observable.add(firestore_observer)
     ambient_humidity.add(firestore_observer)
     ambient_pressure.add(firestore_observer)
     ambient_temperature.add(firestore_observer)
@@ -52,6 +53,7 @@ if __name__ == '__main__':
     soil_moisture_plant_2_observable.add(gcloud_publisher)
     soil_moisture_plant_1_observable.add(gcloud_publisher)
     soil_temp_1_observable.add(gcloud_publisher)
+    soil_temp_2_observable.add(gcloud_publisher)
     ambient_humidity.add(gcloud_publisher)
     ambient_pressure.add(gcloud_publisher)
     ambient_temperature.add(gcloud_publisher)
@@ -59,6 +61,10 @@ if __name__ == '__main__':
     soil_moisture_plant_1_observable.add(firestore_observer_filtered_data)
     soil_moisture_plant_2_observable.add(firestore_observer_filtered_data)
     soil_temp_1_observable.add(firestore_observer_filtered_data)
+    soil_temp_2_observable.add(firestore_observer_filtered_data)
+    ambient_humidity.add(firestore_observer_filtered_data)
+    ambient_pressure.add(firestore_observer_filtered_data)
+    ambient_temperature.add(firestore_observer_filtered_data)
     while True:
         soil_moisture_plant_1_observable.data_refresh(sensor_names[0])
         soil_moisture_plant_2_observable.data_refresh(sensor_names[1])
@@ -66,4 +72,5 @@ if __name__ == '__main__':
         ambient_temperature.data_refresh(sensor_names[4])
         ambient_humidity.data_refresh(sensor_names[5])
         ambient_pressure.data_refresh(sensor_names[6])
+        soil_temp_2_observable.data_refresh(sensor_names[3])
 

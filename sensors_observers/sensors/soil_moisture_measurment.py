@@ -70,6 +70,15 @@ class SoilMoisture(Observable):
         GPIO.cleanup()
         return _sub_total/self._read_times
 
+    def _calculate_percent(self, voltage, reference_voltage="3300"):
+        """
+        Caclulates the % of moisture where the reference voltage is the whole and the voltage is the part
+        :param voltage: part or voltage being read
+        :param reference_voltage: The whole or the reference voltage
+        :return: % of moisture based on the voltage
+        """
+        return (voltage/reference_voltage)*100
+
     def data_refresh(self, object_sensor_to_update=""):
         """
         :arg: object_sensor_to_update: this is the name of the sensor specific to the object
@@ -77,14 +86,13 @@ class SoilMoisture(Observable):
         :return: void
         """
         new_value = self.read_values()
-        if new_value-100 <= self._prior_value >= new_value+100:
+        if new_value-1 <= self._prior_value >= new_value+1:
             self._prior_value = new_value
             self.opts = {
                 "sensor_id": object_sensor_to_update,
                 "units_of_measure" : "moisture",
                 "measurement_precise": new_value,
-                "measurement_friendly": int(new_value),
+                "measurement_friendly": int(self._calculate_percent(new_value)),
                 "common_name": self.friendly_name
             }
             self.notify(value=new_value, opts=object_sensor_to_update, kwarg_opts=self.opts)
-
