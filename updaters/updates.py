@@ -88,6 +88,7 @@ class SendEmail(Observer):
     def error(self):
         pass
 
+
 class GCloudPublisher(Observer):
 
     def __init__(self, project_id, topic_name):

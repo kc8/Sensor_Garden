@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aea9cd1-415f-497c-9e65-2c8fed67e508" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/accounts/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/accounts/signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/partials/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sensor-garden/src/partials/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/services/SensorData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sensor-garden/src/staticPages/about.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/water_plant.py" beforeDir="false" afterPath="$PROJECT_DIR$/watering_operation/water_plant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors_observers/sensors/ambient_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors_observers/sensors/ambient_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors_observers/sensors/soil_moisture_measurment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/updaters/updates.py" beforeDir="false" afterPath="$PROJECT_DIR$/updaters/updates.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,8 @@
       <workItem from="1587997125023" duration="5717000" />
       <workItem from="1588082265070" duration="1680000" />
       <workItem from="1588462716665" duration="4224000" />
-      <workItem from="1588507489049" duration="1051000" />
+      <workItem from="1588507489049" duration="8501000" />
+      <workItem from="1588856126479" duration="1221000" />
     </task>
     <servers />
   </component>

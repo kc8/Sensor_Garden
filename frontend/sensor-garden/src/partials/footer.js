@@ -6,8 +6,8 @@ function Footer() {
         <div className="wrapper">
             <footer className="footer">
                 <div className="content has-text-centered">
-                    <strong>By Kyle Cooper</strong>. Check out the Source code here
-                    <a href="https://github.com/kc8/Sensor_Garden"> on Github</a>.
+                    <strong>By Kyle Cooper</strong>. View the source code on
+                    <a href="https://github.com/kc8/Sensor_Garden"> Github</a>.
                 </div>
             </footer>
         </div>

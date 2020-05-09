@@ -29,7 +29,7 @@ class SoilMoisture(Observable):
             raise ADCChannelError("Error creating ADC channel value must be between 0 - 3")
         self._gpio_pins_obj = GPIO_pins
         self._gpio_pins = []
-        self._prior_value = 9999
+        self._prior_value = 0
         self.friendly_name = friendly_name
         self.opts = {}
 
@@ -79,14 +79,28 @@ class SoilMoisture(Observable):
         """
         return (voltage/reference_voltage)*100
 
+    def _get_percent_different_of_old_and_new_values(self, new_value):
+        """
+        :return: Return True if values are not within 5% of each other, return False otherwise
+        :arg The new value to be compared to
+        """
+        percent_change = ((self._prior_value - new_value)/abs(new_value)) * 100
+        print("Change: ", percent_change)
+        if self._prior_value == 0:
+            return True
+        elif percent_change <= -1.5 or percent_change >= 1.5:
+            return True
+        else:
+            return False
+
     def data_refresh(self, object_sensor_to_update=""):
         """
         :arg: object_sensor_to_update: this is the name of the sensor specific to the object
         Refreshes the sensor data and notifies observers if needed
         :return: void
         """
-        new_value = self.read_values()
-        if new_value-1 <= self._prior_value >= new_value+1:
+        new_value = self.read_values() #2
+        if self._get_percent_different_of_old_and_new_values(new_value):
             self._prior_value = new_value
             self.opts = {
                 "sensor_id": object_sensor_to_update,

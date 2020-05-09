@@ -27,7 +27,7 @@ class AmbientSensor(Observable):
                 "sensor_id": object_sensor_to_update,
                 "units_of_measure" : self.unit_of_measure,
                 "measurement_precise": self._measurement,
-                "measurement_friendly": int(self._measurement),
+                "measurement_friendly": round(self._measurement, 2),
                 "common_name": self.friendly_name
                 }
             self.notify(self._measurement, object_sensor_to_update, kwarg_opts=self.opts)
@@ -49,7 +49,7 @@ class AmbientTemperature(AmbientSensor):
 
 class AmbientPressure(AmbientSensor):
 
-    def __init__(self, unit_of_measure="hPa", friendly_name=None):
+    def __init__(self, unit_of_measure="inHg", friendly_name=None):
         AmbientSensor.__init__(self)
         self.unit_of_measure = unit_of_measure
         self.friendly_name = friendly_name
@@ -58,7 +58,8 @@ class AmbientPressure(AmbientSensor):
         """'''returns the hectopascals (current pressure reading)'''"""
         _pascals = self._sensor.read_pressure()
         _hectopascals = _pascals / 100
-        self._measurement = _hectopascals
+        inches_mercury = _hectopascals * 0.03
+        self._measurement = inches_mercury
         return self._measurement
 
 
