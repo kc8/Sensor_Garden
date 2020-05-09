@@ -28,6 +28,9 @@ const client = new ApolloClient({
   DefaultOptions: defaultOptions
 });
 
+/*TO-DO: Look for a better way to render GetSensorData.
+   Create Array of sensors and pass it with map() into the GetSensorData function? 
+*/
 function SensorGroup() {
 
     return (

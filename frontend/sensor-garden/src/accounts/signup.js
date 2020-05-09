@@ -1,11 +1,13 @@
 import React from 'react';
+import {useForm} from './useForm'
 //import FirebaseAuthComponent from './firebase_config'
 //import fireAuthUI from './firebase_config.js'
 
 
 
 function SignUp () {
-
+    const [values, handleChange]= useForm()
+    console.log(values.email)
     return (
         <div>
         <p>Sign up is not available</p> 

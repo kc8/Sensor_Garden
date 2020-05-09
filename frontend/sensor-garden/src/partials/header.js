@@ -37,7 +37,7 @@ function Header() {
               <a className="button is-primary" href='/accounts/signup'>
                 <strong>Sign up</strong>
               </a>
-              <a className="button is-light">
+              <a className="button is-light" href="/accounts/login">
                 Log in
               </a>
             </div>
