@@ -1,5 +1,5 @@
 import React from 'react';
-//import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Clock from '../clock.js'; 
 
 /*
@@ -14,32 +14,27 @@ Future Responsive menu:
         </ul>
       </nav>
   <li><Link to='/'>Home</Link></li>
+  <a className="button is-primary" href='/accounts/signup'>
+                
+              </a>
 */ 
+
 function Header() {
     return (
       <div>
       <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
       <div id="navbar" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item is-size-4" href='/'>
-            Home
-          </a>
-          <a className="navbar-item is-size-4" href='/about'>
-            About
-          </a>
-          <a className="navbar-item is-size-4" href='/'>
-            Live Data
-          </a>
+        <Link className="navbar-item is-size-4" to='/about'>Home</Link>
+        <Link className="navbar-item is-size-4" to='/about'>About</Link>
+        <Link className="navbar-item is-size-4" to='/'>Live Data</Link>
+        <Link className="navbar-item is-size-4" to='/water/waterGarden'>Water Garden</Link>
         </div>
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary" href='/accounts/signup'>
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light" href="/accounts/login">
-                Log in
-              </a>
+            <Link className="button is-primary" to='/accounts/signup'><strong>Sign up</strong></Link>
+            <Link className="button is-light" to='/accounts/login'><strong>Log in</strong></Link>
             </div>
           </div>
         </div>

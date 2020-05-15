@@ -9,10 +9,10 @@ import LogIn from "./accounts/logIn.js"
 import { AuthProvider } from "./accounts/authProvider.js";
 import WaterGarden from "./services/waterGarden/waterGarden.js"
 import PrivateRoute from "./accounts/privateRoutes.js";
+import AccountInformationDisplay from './accounts/accountInformation.js'
 
 import './static/custom.css'; //custom css for a sticky footer. 
 
-//Auth provider provides the currentUser to all sub components
  function App() {
   
   return (

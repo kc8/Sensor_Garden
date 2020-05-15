@@ -1,3 +1,4 @@
+//Custom React hook for handling the user login form. 
 import {useState} from 'react';
 
 export const useForm = (initValues) => {

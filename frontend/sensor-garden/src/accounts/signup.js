@@ -7,7 +7,6 @@ import {useForm} from './useForm'
 
 function SignUp () {
     const [values, handleChange]= useForm()
-    console.log(values.email)
     return (
         <div>
         <p>Sign up is not available</p> 
