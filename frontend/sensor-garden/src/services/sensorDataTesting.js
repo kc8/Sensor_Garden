@@ -19,7 +19,7 @@ const QueryResults = ({sensorId}) => (
     <Query 
         query={getSensorValues}
         variables={{sensorId}}
-        pollInterval = {10000}
+        pollInterval = {30000}
         > 
         {({loading, error, data}) => {
             if (loading) return <article className="tile is-child box"><p>Loading...</p></article>; 

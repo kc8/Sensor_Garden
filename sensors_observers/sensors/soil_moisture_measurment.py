@@ -12,7 +12,7 @@ class SoilMoisture(Observable):
         A class that reads values from an ADC which is connected to a soil moisture probe. This class
         will interpret the data to give an estimate of the moisture content in the water.
 
-        The higher the amount of reads the more accurate the moisture amount is. Unfortunatley, this operation
+        The higher the amount of reads the more accurate the moisture amount is. Unfortunately, this operation
         results in more resource use and a longer read time.
         :arg
             :gain: Default 1. The ADC gain error is is an offset error calculation

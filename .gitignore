@@ -1,4 +1,5 @@
 #Custom Ignore files below
+db_info.json
 temp_allowed_users.json
 firebase_config.js
 /functions_dev_env

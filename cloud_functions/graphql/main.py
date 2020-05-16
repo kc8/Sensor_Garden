@@ -124,7 +124,6 @@ app.add_url_rule(
 
 @app.route('/')
 def main(request=None):
-    # Some test queries:
     pass
 
 

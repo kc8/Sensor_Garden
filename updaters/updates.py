@@ -1,11 +1,13 @@
 from sensors_observers import Observer
-
 # Imports below require firestore on device
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from google.cloud import pubsub_v1
 import json
+# Imports for time series DB
+from .time_series_db.models import Readings
+from .time_series_db.engine import session
 
 class UpdatePostgres(Observer):
 
@@ -13,10 +15,22 @@ class UpdatePostgres(Observer):
         Observer.__init__(self)
 
     def update(self, arg, opt=None, kwarg_opts=None):
-        print(arg)
+        pass
+        # data = Readings(
+        #     soil_temperature_1 =
+        #     soil_temperature_2 =
+        #     soil_moisture_1 =
+        #     soil_moisture_2 =
+        #     ambient_temperature =
+        #     ambient_humidity =
+        #     ambient_pressure =
+        # )
+        # session.add(data)
+        # session.commit()
 
     def error(self):
         pass
+
 
 
 class UpdateFirestoreFilteredData(Observer):

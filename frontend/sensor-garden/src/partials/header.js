@@ -25,7 +25,7 @@ function Header() {
       <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
       <div id="navbar" className="navbar-menu">
         <div className="navbar-start">
-        <Link className="navbar-item is-size-4" to='/about'>Home</Link>
+        <Link className="navbar-item is-size-4" to='/'>Home</Link>
         <Link className="navbar-item is-size-4" to='/about'>About</Link>
         <Link className="navbar-item is-size-4" to='/'>Live Data</Link>
         <Link className="navbar-item is-size-4" to='/water/waterGarden'>Water Garden</Link>

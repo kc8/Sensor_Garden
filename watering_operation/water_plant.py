@@ -33,3 +33,6 @@ def water(plant_num):
         GPIO.output(GPIO_RELAY_1, 0)
         GPIO.output(GPIO_RELAY_2, 0)
         GPIO.cleanup()
+
+
+water(0)
