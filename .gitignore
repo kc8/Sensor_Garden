@@ -16,7 +16,7 @@ sensor_garden_cloud_project_auth.json
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+*/node_modules
 /.pnp
 .pnp.js
 
@@ -177,3 +177,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+*/trunk
+*/target/*

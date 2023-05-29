@@ -1,0 +1,8 @@
+[Unit]
+Description="Sensor Garden Starter"
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/home/pi/sensor_garden/tom_project_2020/start.sh
+

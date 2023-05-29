@@ -1,0 +1,9 @@
+[package]
+name = "sensorgardenyew" 
+version = "0.1.0" 
+edition = "2021"
+
+[dependencies]
+yew = {version="0.20.0", features=["csr"]}
+yew-router = "0.17"
+trunk = "0.15.0"

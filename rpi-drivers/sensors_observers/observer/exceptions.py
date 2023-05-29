@@ -1,0 +1,2 @@
+class FailedToRemoveObserver(BaseException):
+    pass
