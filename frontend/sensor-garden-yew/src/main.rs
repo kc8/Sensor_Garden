@@ -7,9 +7,11 @@ use crate::components::{AboutPage, Footer, Header};
 fn App() -> Html {
 
     html! {
-        <div>
+        <div className="site">
             <Header />
+            <main className="Site-content">
             <AboutPage />
+            </main>
             <Footer />
         </div>
     }
