@@ -1,30 +1,32 @@
 use yew::prelude::*;
+use crate::Route;
+use yew_router::prelude::*;
 
 // structures
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct SensorData {
-    common_name: String,
-    measurment_friendly: String,
-    unit_of_measure: String,
+    pub common_name: String,
+    pub measurment_friendly: String,
+    pub unit_of_measure: String,
 }
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct Sensor {
-    sensor_data: Vec<SensorData>,
+    pub sensor_data: Vec<SensorData>,
 }
 
 // components
 #[function_component]
 pub fn AboutPage() -> Html {
     html! {
-        <div className="content">
-            <h1 className="title is-1">{"About"}</h1>
+        <div class="content">
+            <h1 class="title is-1">{"About"}</h1>
             <article>
                 <p>{"This site displays the sensor readings collected from the garden in the picture below"}</p>
                 <p>{"Picture to come! We will be re-designing part of the garden in the coming weeks"}</p>
                 <h2>{"Sensor Descriptions"}</h2>
-                <table className="table is-striped">
+                <table class="table is-striped">
                 <thead>
                     <tr><td>{"Sensor Name"}</td><td>{"Description"}</td></tr>
                 </thead>
@@ -58,9 +60,9 @@ pub fn AboutPage() -> Html {
 #[function_component]
 pub fn Footer() -> Html {
     html! {
-        <div className="wrapper">
-            <footer className="footer">
-                <div className="content has-text-centered">
+        <div class="wrapper">
+            <footer class="footer">
+                <div class="content has-text-centered">
                     <strong>{"By Kyle Cooper"}</strong>{". View the source code on"}
                     <a href="https://github.com/kc8/Sensor_Garden">{"Github"}</a>{"."}
                 </div>
@@ -74,9 +76,9 @@ fn creaete_sesnor_data(props: &Sensor) -> Html {
     // TODO key... for each article that is generated?
     html! {
     { for props.sensor_data.clone().into_iter().map(|s| html_nested! {
-            <article className="tile is-child box">
-                <p className="title">{s.common_name}</p>
-                <p className="subtitle">{s.measurment_friendly} {s.unit_of_measure}</p>
+            <article class="tile is-child box">
+                <p class="title">{s.common_name}</p>
+                <p class="subtitle">{s.measurment_friendly} {s.unit_of_measure}</p>
             </article> }) }
     }
 }
@@ -84,10 +86,10 @@ fn creaete_sesnor_data(props: &Sensor) -> Html {
 #[function_component]
 fn DataContainer(props: &Sensor) -> Html {
     html! {
-        <section className="hero">
-            <div className="hero-body">
-                <div className="tile is-ancestor">
-                    <div className="tile is-parent">
+        <section class="hero">
+            <div class="hero-body">
+                <div class="tile is-ancestor">
+                    <div class="tile is-parent">
                     { creaete_sesnor_data(props) }
                     </div>
                 </div>
@@ -99,10 +101,10 @@ fn DataContainer(props: &Sensor) -> Html {
 #[function_component]
 pub fn SensorGroup(sensor_data: &Sensor) -> Html {
     html! {
-        <section className="hero">
-          <div className="hero-body">
-            <div className="tile is-ancestor">
-              <div className="tile is-parent">
+        <section class="hero">
+          <div class="hero-body">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
               <DataContainer ..sensor_data.clone() />
               </div>
             </div>
@@ -124,14 +126,14 @@ pub fn QuerySensor() -> Html {
         pollInterval = {30000}
         >
         {({loading, error, data}) => {
-            if (loading) return <article className="tile is-child box"><p>Loading...</p></article>;
-            if (error) return <article className="tile is-child box"><p>Error While Getting Sensor Values for {sensorId}</p></article>;
+            if (loading) return <article class="tile is-child box"><p>Loading...</p></article>;
+            if (error) return <article class="tile is-child box"><p>Error While Getting Sensor Values for {sensorId}</p></article>;
 
             return (
                 data.measurementsSpecificValues.map(({commonName, measurementFriendly, unitsOfMeasure}) => (
-                    <article key={commonName} className="tile is-child box">
-                        <p className="title">{commonName}</p>
-                        <p className="subtitle">{measurementFriendly} {unitsOfMeasure}</p>
+                    <article key={commonName} class="tile is-child box">
+                        <p class="title">{commonName}</p>
+                        <p class="subtitle">{measurementFriendly} {unitsOfMeasure}</p>
                     </article>
                 ))
             )
@@ -144,26 +146,26 @@ pub fn QuerySensor() -> Html {
 pub fn Header() -> Html {
     html! {
     <div>
-          <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
-          <div id="navbar" className="navbar-menu">
-            <div className="navbar-start">
-            <a className="navbar-item is-size-4" to="/">{"Home"}</a>
-            <a className="navbar-item is-size-4" to="/about">{"About"}</a>
-            <a className="navbar-item is-size-4" to="/">{"Live Data"}</a>
+          <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+          <div id="navbar" class="navbar-menu">
+            <div class="navbar-start">
+            <Link<Route> classes="navbar-item is-size-4" to={Route::Home}>{"Home"}</Link<Route>>
+            <Link<Route> classes="navbar-item is-size-4" to={Route::About}>{"About"}</Link<Route>>
+            <Link<Route> classes="navbar-item is-size-4" to={Route::Home}>{"Live Data"}</Link<Route>>
             </div>
-            <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
                 </div>
               </div>
             </div>
           </div>
         </nav>
-        <section className="hero is-primary">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">{"Sensor Garden"}</h1>
-            <h2 className="subtitle">
+        <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">{"Sensor Garden"}</h1>
+            <h2 class="subtitle">
             </h2>
           </div>
         </div>
