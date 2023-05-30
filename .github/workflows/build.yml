@@ -35,6 +35,7 @@ jobs:
     - name: Build and Push Dockerimage
       uses: docker/build-push-action@v2
       with: 
+        file: ./backend/DockerFile
         push: true
         tags : registry.digitalocean.com/cooper-cluster-container-registry/com.cooperkyle.sensorgardenbackend
 
