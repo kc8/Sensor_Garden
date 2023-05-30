@@ -14,9 +14,8 @@ Have a look here at some of the live data: https://sensorgarden.cooperkyle.com/
 - Google App Engine (for hosting with GraphQL)
 - Google PubSub (will be used later for websockets)
 - Google Cloud Functions (old method of getting measurements)
-- React (Javascript/ ES6+)
+- Rust's Yew and WASM
 - Bulma for CSS framework
-- 
 
 ## Future Ideas: 
 - Light Sensor for measuring the suns rays (waiting on parts to arrive in the mail!)
