@@ -16,7 +16,7 @@ jobs:
 
     - name: Test Go Build 
       run: go test -v ./...
-      working-directory: ./relaySwitcher
+      working-directory: ./backend
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
