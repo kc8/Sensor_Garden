@@ -1,6 +1,8 @@
-package main 
+package main
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
@@ -22,18 +24,6 @@ type Response struct {
     Body string;
 }
 
-
-func (s* Services) postSensorData(g *gin.Context) {
-    var json Sensor ;
-    isValid := g.ShouldBindJSON(&json);
-    if isValid != nil {
-        g.JSON(http.StatusBadRequest, gin.H{"Invalid request for settting status": isValid.Error()});
-        return
-    }
-    s.SensorData[json.name] = json;
-    g.JSON(http.StatusOK, gin.H{"Recieved SensorData" : json.name});
-}
-
 func (s* Services) getAvailSensors(g* gin.Context) {
 }
 
@@ -42,13 +32,26 @@ func (s* Services) waterSensorData(g* gin.Context) {
 }
 
 func main() {
-    router := gin.Default();
-    services := new(Services);
-
-    router.POST("/sendData", services.postSensorData);
-    router.POST("/getAvailSenors", services.getAvailSensors);
-    router.GET("/waterGarden", services.waterSensorData);
-
-    router.Run(":8080");
+    http.HandleFunc("/sendData", startCommsForData);
+    log.Fatal(http.ListenAndServe(":8080", nil));
 }
 
+func startCommsForData(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("received WS upgrade connection request from client");
+	ws, err := UpgradeAndEstablishConnection(w, r);
+	if err != nil { 
+        log.Fatal("Recieved invalid website when upgrading connection");
+	}
+    ws.Start();
+}
+
+func sendTestMessage(conn *WSConn) {
+	var rawBuffer []byte;
+	conn.SetMessageType(TextMessage);
+    rawBuffer = rawBuffer[:0];
+    rawBuffer = append(rawBuffer, "TEST"...);
+	var err WriteError = conn.Write(rawBuffer);
+    if err.Err != nil { 
+        fmt.Println("Failed to send TEST data to client", err.Err);
+    }
+}
