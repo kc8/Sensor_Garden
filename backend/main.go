@@ -73,6 +73,7 @@ func (s *Services) updateSensorData(g *gin.Context) {
 	isBound := g.ShouldBindJSON(&json)
 
 	if isBound != nil {
+		log.Println("[WARN] Received invalid json for /sendData", isBound.Error())
 		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
 		return
 	}
@@ -82,6 +83,7 @@ func (s *Services) updateSensorData(g *gin.Context) {
 		g.JSON(http.StatusBadRequest, gin.H{
 			"Failed to update sensors": "Request did not contain a list of sensors to update",
 		})
+		log.Println("[WARN] Received invalid length of sensors for sendData")
 		return
 	}
 	for i := 0; i < sensorLen; i++ {
