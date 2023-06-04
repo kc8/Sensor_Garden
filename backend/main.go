@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -29,7 +30,6 @@ func (s *Services) getAvailSensors(g *gin.Context) {
 func (s *Services) waterSensorData(g *gin.Context) {
 }
 
-// todo: do I like this?
 func (s *Services) populateTheSensors(g *gin.Context) {
 	var json RawSensors
 	isBound := g.ShouldBindJSON(&json)
@@ -96,6 +96,7 @@ func (s *Services) updateSensorData(g *gin.Context) {
 			unit:        unit,
 		}
 		currentStatus := s.sensors.Update(sensorData)
+        log.Println("[INFO] Received request to update sensor with the following", sensorData);
 
 		// TODO don't fail right away, update sensors that are valid and
 		// then return states for each sensor updated
@@ -130,10 +131,21 @@ func (s *Services) getSensorData(g *gin.Context) {
 }
 
 func main() {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 	r.Use(AuthWrapper())
 	services := Services{}
+
+    // since our rpi-drivers are messy.. for now I just want to update them here
+    sensorNames := []string{
+        "soil_moisture_plant_1",
+        "soil_moisture_plant_2",
+        "soil_temp_plant_1",
+        "soil_temp_plant_2",
+        "ambient_temp",
+        "ambient_humidity",
+        "ambient_pressure"}
+    services.sensors.InitSensors(sensorNames, len(sensorNames))
 
 	r.POST("/sendData", services.updateSensorData)
 	r.POST("/populateTheSensorsFromDevice", services.populateTheSensors)
