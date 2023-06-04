@@ -35,12 +35,12 @@ func (s *Services) populateTheSensors(g *gin.Context) {
 	isBound := g.ShouldBindJSON(&json)
 
 	if isBound != nil {
-		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
+		g.JSON(http.StatusBadRequest, gin.H{"RECEIVED INVALID REQUEST": isBound.Error()})
 		return
 	}
 	if s.sensors.sensors != nil {
 		g.JSON(http.StatusBadRequest, gin.H{
-			"Failed to init sensors": "Senseors already initilized. Please add instead",
+			"Failed to init sensors": "Sensors already inited. Please add instead",
 		})
 		return
 	}
@@ -74,7 +74,7 @@ func (s *Services) updateSensorData(g *gin.Context) {
 
 	if isBound != nil {
 		log.Println("[WARN] Received invalid json for /sendData", isBound.Error())
-		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
+		g.JSON(http.StatusBadRequest, gin.H{"RECEIVED INVALID REQUEST": isBound.Error()})
 		return
 	}
 
