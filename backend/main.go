@@ -1,57 +1,119 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-type Sensor struct {
-    measurement float32;
-    name string;
-    unit string;
-}
-
 type Services struct {
-    authUrl string;
-    SensorData map[string]Sensor;
+	sensors Sensors
 }
 
-type Response struct {
-    StatusCode int;
-    Headers map[string]string;
-    Body string;
+type RawSensorData struct {
+	SensorName string  `'json:"sensorName"`
+	Id         string  `'json:"id"`
+	Status     string  `'json:"status"`
+	Unit       string  `'json:"unit"`
+	Measurment float32 `'json:"measurment"`
 }
 
-func (s* Services) getAvailSensors(g* gin.Context) {
+type RawSensors struct {
+	Sensors []RawSensorData `'json:"sensors"`
 }
 
-func (s* Services) waterSensorData(g* gin.Context) {
-    // NOTE don't forget the auth!
+func (s *Services) getAvailSensors(g *gin.Context) {
+}
+
+// NOTE auth!
+func (s *Services) waterSensorData(g *gin.Context) {
+}
+
+// todo: do I like this?
+func (s *Services) populateTheSensors(g *gin.Context) {
+	var json RawSensors
+	isBound := g.ShouldBindJSON(&json)
+
+	if isBound != nil {
+		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
+		return
+	}
+    if s.sensors.sensors != nil {
+		g.JSON(http.StatusBadRequest, gin.H{
+            "Failed to init sensors": "Senseors already initilized. Please add instead",
+		})
+        return
+    }
+
+	sensorLen := len(json.Sensors)
+	if sensorLen <= 0 {
+		g.JSON(http.StatusBadRequest, gin.H{
+			"Failed to update sensors": "Request did not contain a list of sensors to update",
+		})
+		return
+	}
+    s.sensors.sensors = make(map[SensorName]SensorData, 10)
+	for i := 0; i < sensorLen; i++ {
+		var currentSensor = json.Sensors[i]
+		name := SensorName{name: currentSensor.SensorName}
+		measurement := currentSensor.Measurment
+		unit := currentSensor.Unit
+        s.sensors.sensors[name] = SensorData{
+            name: name,
+            measurement: measurement,
+            unit: unit,
+        }
+
+	}
+	g.JSON(http.StatusOK, gin.H{"Sesnor Data populated": true})
+}
+
+func (s *Services) updateSensorData(g *gin.Context) {
+	var json RawSensors
+	isBound := g.ShouldBindJSON(&json)
+
+	if isBound != nil {
+		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
+		return
+	}
+
+	sensorLen := len(json.Sensors)
+	if sensorLen <= 0 {
+		g.JSON(http.StatusBadRequest, gin.H{
+			"Failed to update sensors": "Request did not contain a list of sensors to update",
+		})
+		return
+	}
+	for i := 0; i < sensorLen; i++ {
+		var currentSensor = json.Sensors[i]
+		name := SensorName{name: currentSensor.SensorName}
+		measurement := currentSensor.Measurment
+		unit := currentSensor.Unit
+
+		sensorData := SensorData{
+			measurement: measurement,
+			name:        name,
+			unit:        unit,
+		}
+		currentStatus := s.sensors.Update(sensorData)
+
+		// TODO don't fail right away, update sensors that are valid and
+		// then return states for each sensor updated
+		if currentStatus == false {
+			g.JSON(http.StatusOK, gin.H{"Update Sensor Data": currentStatus})
+            return
+		}
+	}
+	g.JSON(http.StatusOK, gin.H{"Update Sensor Data": true})
 }
 
 func main() {
-    http.HandleFunc("/sendData", startCommsForData);
-    log.Fatal(http.ListenAndServe(":8080", nil));
-}
+	r := gin.New()
+	r.Use(AuthWrapper())
+	services := Services{}
 
-func startCommsForData(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("received WS upgrade connection request from client");
-	ws, err := UpgradeAndEstablishConnection(w, r);
-	if err != nil { 
-        log.Fatal("Recieved invalid website when upgrading connection");
-	}
-    ws.Start();
-}
+	r.POST("/sendData", services.updateSensorData)
+	r.POST("/populateTheSensorsFromDevice", services.populateTheSensors)
 
-func sendTestMessage(conn *WSConn) {
-	var rawBuffer []byte;
-	conn.SetMessageType(TextMessage);
-    rawBuffer = rawBuffer[:0];
-    rawBuffer = append(rawBuffer, "TEST"...);
-	var err WriteError = conn.Write(rawBuffer);
-    if err.Err != nil { 
-        fmt.Println("Failed to send TEST data to client", err.Err);
-    }
+	r.Run(":8080")
 }
