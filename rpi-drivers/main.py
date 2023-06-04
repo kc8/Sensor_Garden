@@ -2,17 +2,13 @@
 from sensors_observers.sensors import AmbientTemperature, AmbientHumidity, AmbientPressure,\
                                         Temperature, GPIOPins, SoilMoisture
 from sensors_observers.observer import Observable, Observer
-from updaters import UpdateFirestore, GCloudPublisher, UpdateFirestoreFilteredData
+from updaters import UpdateSensorGardenBackend
 import os
 
 # To-Do: Need to think of a better way to handle these updates rather than just one
 #     large Class
 
 if __name__ == '__main__':
-    # Because we are running with multiple processes we need  Python setup authentication with GCloud
-    #    As soon as main runs. TO-DO: pass in as arg instead?
-    path_to_auth = "/home/pi/sensor_garden/tom_project_2020/sensor-garden-function-auth.json"
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = path_to_auth
 
     # The names of the sensors which are also the columns, fields IDs, or names  in our observers
     sensor_names = [
@@ -38,33 +34,17 @@ if __name__ == '__main__':
     ambient_humidity = AmbientHumidity(friendly_name="Ambient Humidity")
     ambient_pressure = AmbientPressure(friendly_name="Ambient Pressure")
     # Create Observers:
-    firestore_observer = UpdateFirestore()
-    firestore_observer_filtered_data = UpdateFirestoreFilteredData()
-    gcloud_publisher = GCloudPublisher(project_id="tomato-sensor", topic_name="sensor-garden-readings")
+    sgb_observer = UpdateSensorGardenBackend()
+
     # Add observers to observables for notification
-    soil_moisture_plant_2_observable.add(firestore_observer)
-    soil_moisture_plant_1_observable.add(firestore_observer)
-    soil_temp_1_observable.add(firestore_observer)
-    soil_temp_2_observable.add(firestore_observer)
-    ambient_humidity.add(firestore_observer)
-    ambient_pressure.add(firestore_observer)
-    ambient_temperature.add(firestore_observer)
-    # GCloud Publisher observer
-    soil_moisture_plant_2_observable.add(gcloud_publisher)
-    soil_moisture_plant_1_observable.add(gcloud_publisher)
-    soil_temp_1_observable.add(gcloud_publisher)
-    soil_temp_2_observable.add(gcloud_publisher)
-    ambient_humidity.add(gcloud_publisher)
-    ambient_pressure.add(gcloud_publisher)
-    ambient_temperature.add(gcloud_publisher)
-    # FirestoreFiltered Data Update
-    soil_moisture_plant_1_observable.add(firestore_observer_filtered_data)
-    soil_moisture_plant_2_observable.add(firestore_observer_filtered_data)
-    soil_temp_1_observable.add(firestore_observer_filtered_data)
-    soil_temp_2_observable.add(firestore_observer_filtered_data)
-    ambient_humidity.add(firestore_observer_filtered_data)
-    ambient_pressure.add(firestore_observer_filtered_data)
-    ambient_temperature.add(firestore_observer_filtered_data)
+    soil_moisture_plant_2_observable.add(sgb_observer)
+    soil_moisture_plant_1_observable.add(sgb_observer)
+    soil_temp_1_observable.add(sgb_observer)
+    soil_temp_2_observable.add(sgb_observer)
+    ambient_humidity.add(sgb_observer)
+    ambient_pressure.add(sgb_observer)
+    ambient_temperature.add(sgb_observer)
+
     while True:
         soil_moisture_plant_1_observable.data_refresh(sensor_names[0])
         soil_moisture_plant_2_observable.data_refresh(sensor_names[1])

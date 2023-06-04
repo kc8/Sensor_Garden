@@ -16,7 +16,7 @@ jobs:
 
     - name: Test Go Build 
       run: go test -v ./...
-      working-directory: ./relaySwitcher
+      working-directory: ./backend
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
@@ -35,6 +35,7 @@ jobs:
     - name: Build and Push Dockerimage
       uses: docker/build-push-action@v2
       with: 
+        context: ./backend
         push: true
         tags : registry.digitalocean.com/cooper-cluster-container-registry/com.cooperkyle.sensorgardenbackend
 
