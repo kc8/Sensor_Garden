@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 )
@@ -21,11 +22,9 @@ type Sensors struct {
 
 func (sd *Sensors) Update(sensor SensorData) bool {
 	sensorMapped, isSensorInMap := sd.sensors[sensor.name]
-    fmt.Println(sensorMapped);
-    fmt.Println(isSensorInMap);
 
 	if isSensorInMap == true {
-		sensorMapped.measurement = sensor.measurement
+		sd.sensors[sensor.name] = sensor 
 
 		if sensorMapped.name != sensor.name {
 			log.Println("[WARN] Received a differeing sensor name from client...")
@@ -37,4 +36,14 @@ func (sd *Sensors) Update(sensor SensorData) bool {
 		return true
 	}
 	return false
+}
+
+func (sd *Sensors) GetSensorData(sensorName SensorName) (SensorData, error) {
+	sensorMapped, isSensorInMap := sd.sensors[sensorName]
+    fmt.Println("get", sensorMapped.measurement);
+	if isSensorInMap == true {
+		return sensorMapped, nil
+	}
+    // TODO can we return something else besides the empty struct here?
+	return SensorData{}, errors.New("Sensor does not exist")
 }

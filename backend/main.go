@@ -38,12 +38,12 @@ func (s *Services) populateTheSensors(g *gin.Context) {
 		g.JSON(http.StatusBadRequest, gin.H{"RECEIEVED INVALID REQUEST": isBound.Error()})
 		return
 	}
-    if s.sensors.sensors != nil {
+	if s.sensors.sensors != nil {
 		g.JSON(http.StatusBadRequest, gin.H{
-            "Failed to init sensors": "Senseors already initilized. Please add instead",
+			"Failed to init sensors": "Senseors already initilized. Please add instead",
 		})
-        return
-    }
+		return
+	}
 
 	sensorLen := len(json.Sensors)
 	if sensorLen <= 0 {
@@ -52,17 +52,17 @@ func (s *Services) populateTheSensors(g *gin.Context) {
 		})
 		return
 	}
-    s.sensors.sensors = make(map[SensorName]SensorData, 10)
+	s.sensors.sensors = make(map[SensorName]SensorData, 10)
 	for i := 0; i < sensorLen; i++ {
 		var currentSensor = json.Sensors[i]
 		name := SensorName{name: currentSensor.SensorName}
 		measurement := currentSensor.Measurment
 		unit := currentSensor.Unit
-        s.sensors.sensors[name] = SensorData{
-            name: name,
-            measurement: measurement,
-            unit: unit,
-        }
+		s.sensors.sensors[name] = SensorData{
+			name:        name,
+			measurement: measurement,
+			unit:        unit,
+		}
 
 	}
 	g.JSON(http.StatusOK, gin.H{"Sesnor Data populated": true})
@@ -101,19 +101,43 @@ func (s *Services) updateSensorData(g *gin.Context) {
 		// then return states for each sensor updated
 		if currentStatus == false {
 			g.JSON(http.StatusOK, gin.H{"Update Sensor Data": currentStatus})
-            return
+			return
 		}
 	}
 	g.JSON(http.StatusOK, gin.H{"Update Sensor Data": true})
 }
 
+func (s *Services) getAvailableSensors(g *gin.Context) {
+}
+
+func (s *Services) getSensorData(g *gin.Context) {
+	sensorName := g.Query("sensorName")
+	data, err := s.sensors.GetSensorData(SensorName{name: sensorName})
+	if err != nil {
+		g.JSON(http.StatusBadRequest, gin.H{"Could not find sensor": sensorName})
+		return
+	}
+    serializedData := RawSensorData{
+		SensorName: data.name.name,
+		Id:         "",
+        Status:     "",
+        Unit: data.unit,
+		Measurment: data.measurement,
+	}
+
+	g.JSON(http.StatusOK, serializedData)
+	return
+}
+
 func main() {
+	// gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 	r.Use(AuthWrapper())
 	services := Services{}
 
 	r.POST("/sendData", services.updateSensorData)
 	r.POST("/populateTheSensorsFromDevice", services.populateTheSensors)
+	r.GET("/getSensorData", services.getSensorData)
 
 	r.Run(":8080")
 }
