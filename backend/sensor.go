@@ -7,25 +7,26 @@ import (
 
 type SensorData struct {
 	measurement float32
-	name        SensorName
+	name        string
 	unit        string
+	id          SensorId
 }
 
-type SensorName struct {
-	name string
+type SensorId struct {
+	id string
 }
 
 type Sensors struct {
-	sensors map[SensorName]SensorData
+	sensors map[SensorId]SensorData
 }
 
 func (sd *Sensors) Update(sensor SensorData) bool {
-	sensorMapped, isSensorInMap := sd.sensors[sensor.name]
+	sensorMapped, isSensorInMap := sd.sensors[sensor.id]
 
 	if isSensorInMap == true {
-		sd.sensors[sensor.name] = sensor
+		sd.sensors[sensor.id] = sensor
 
-		if sensorMapped.name != sensor.name {
+		if sensorMapped.id != sensor.id {
 			log.Println("[WARN] Received a differeing sensor name from client...")
 		}
 
@@ -37,8 +38,8 @@ func (sd *Sensors) Update(sensor SensorData) bool {
 	return false
 }
 
-func (sd *Sensors) GetSensorData(sensorName SensorName) (SensorData, error) {
-	sensorMapped, isSensorInMap := sd.sensors[sensorName]
+func (sd *Sensors) GetSensorData(sensorId SensorId) (SensorData, error) {
+	sensorMapped, isSensorInMap := sd.sensors[sensorId]
 	if isSensorInMap == true {
 		return sensorMapped, nil
 	}
@@ -46,17 +47,18 @@ func (sd *Sensors) GetSensorData(sensorName SensorName) (SensorData, error) {
 	return SensorData{}, errors.New("Sensor does not exist")
 }
 
-func (sd *Sensors) InitSensors(sensorNames []string, size int) {
-	sd.sensors = make(map[SensorName]SensorData, size)
+func (sd *Sensors) InitSensors(sensorIds []string, size int) {
+	sd.sensors = make(map[SensorId]SensorData, size)
 	for i := 0; i < size; i++ {
-		var currentSensor = sensorNames[i]
-		name := SensorName{name: currentSensor}
+		var currentSensor = sensorIds[i]
+		id := SensorId{id: currentSensor}
 		unit := ""
 
-		sd.sensors[name] = SensorData{
-			name:        name,
+		sd.sensors[id] = SensorData{
+			id:          id,
 			measurement: 0.0,
 			unit:        unit,
+			name:        "",
 		}
 	}
 }

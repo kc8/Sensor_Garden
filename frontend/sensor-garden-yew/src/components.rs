@@ -2,8 +2,6 @@ use yew::prelude::*;
 use crate::Route;
 use yew_router::prelude::*;
 
-// structures
-
 #[derive(Clone, PartialEq, Properties)]
 pub struct SensorData {
     pub common_name: String,
@@ -72,7 +70,7 @@ pub fn Footer() -> Html {
 }
 
 //TODO loving the clone....
-fn creaete_sesnor_data(props: &Sensor) -> Html {
+fn create_sesnor_data(props: &Sensor) -> Html {
     // TODO key... for each article that is generated?
     html! {
     { for props.sensor_data.clone().into_iter().map(|s| html_nested! {
@@ -90,7 +88,7 @@ fn DataContainer(props: &Sensor) -> Html {
             <div class="hero-body">
                 <div class="tile is-ancestor">
                     <div class="tile is-parent">
-                    { creaete_sesnor_data(props) }
+                    { create_sesnor_data(props) }
                     </div>
                 </div>
             </div>

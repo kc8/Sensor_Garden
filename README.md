@@ -8,19 +8,13 @@ Have a look here at some of the live data: https://sensorgarden.cooperkyle.com/
 
 ## Technology Used
 
-- Python with the some custom built modules for reading sensor values, and some from AdaFruit
-- Firebase: Firestore, and Hosting
-- GraphQL with Flask and Graphene 
-- Google App Engine (for hosting with GraphQL)
-- Google PubSub (will be used later for websockets)
-- Google Cloud Functions (old method of getting measurements)
-- Rust's Yew and WASM
+- Rust's Yew and WASM (hosted statically inside of Kubernetes)
 - Bulma for CSS framework
+- Backend written with gin-gonic in go (hosted inside of  Kubernetes)
+
+## rpi-drivers
+These are the drivers for the sensors as well as a way to upload the data to the backend. 
 
 ## Future Ideas: 
-- Light Sensor for measuring the suns rays (waiting on parts to arrive in the mail!)
-- Pictures of the plant growth that are automatically taken and stored in the database. Picture would be taken 1 - 3 times a day and updated? 
-- A time series report of values
-- Ability to automatically and manually water the garden when the soil needs it + monitoring (waiting on parts to arrive in the mail!)
-- A better method of quantifying moisture levels 
-- 
+- re-write the rpi-drivers (they are a bit old and hard to manage)
+- Add ability to 'water' the garden. I have the hardware to do this, but not the code

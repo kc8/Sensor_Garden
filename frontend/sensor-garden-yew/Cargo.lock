@@ -2166,7 +2166,11 @@ dependencies = [
 name = "sensorgardenyew"
 version = "0.1.0"
 dependencies = [
+ "gloo-net",
+ "serde",
+ "serde_json",
  "trunk",
+ "wasm-bindgen-futures",
  "yew",
  "yew-router",
 ]
