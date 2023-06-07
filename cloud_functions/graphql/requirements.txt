@@ -1,7 +1,0 @@
-Flask==1.1.2     
-Flask-SocketIO==4.3.0
-google-cloud-firestore==1.3.0
-flask==1.1.2
-graphene
-flask_cors
-flask-graphql

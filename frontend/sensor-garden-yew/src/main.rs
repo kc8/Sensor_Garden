@@ -1,6 +1,5 @@
 use gloo_net::http::Request;
 use serde::Deserialize;
-use serde_json::json;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -8,7 +7,6 @@ mod components;
 use crate::components::{AboutPage, Footer, Header, SensorData, SensorGroup};
 
 const BACKEND_END_POINT: &str = "https://sgb.cooperkyle.com/getSensorData";
-//const BACKEND_END_POINT: &str = "http://127.0.0.1:8085/getSensorData";
 const HEADER_AUTH: &str = "AUTH-HEADER";
 const HEADER_AUTH_VALUE: &str = "temp value";
 
@@ -92,28 +90,6 @@ fn app() -> Html {
             </div>
         </BrowserRouter>
     }
-}
-
-fn setupDataComp() -> Html {
-    let sensor_list = vec![
-        "soil_moisture_plant_1",
-        "soil_moisture_plant_2",
-        "ambient_humidity",
-        "ambient_temp",
-        "ambient_pressure",
-        "soil_temp_plant_1",
-        "soil_temp_plant_2",
-    ];
-    let mut sensor_data: Vec<SensorData> = Vec::new();
-
-    for sensor in sensor_list {
-        sensor_data.push(SensorData {
-            common_name: sensor.to_string(),
-            measurment_friendly: "0.0".to_string(),
-            unit_of_measure: "NOTHING".to_string(),
-        });
-    }
-    html! { <SensorGroup sensor_data={sensor_data} />}
 }
 
 fn route(routes: Route) -> Html {
