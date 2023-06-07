@@ -120,6 +120,7 @@ func (s *Services) getAvailableSensors(g *gin.Context) {
 
 func (s *Services) getSensorData(g *gin.Context) {
 	sensorId := g.Query("sensorId")
+    fmt.Println(sensorId);
 	data, err := s.sensors.GetSensorData(SensorId{id: sensorId})
 	if err != nil {
 		g.JSON(http.StatusBadRequest, gin.H{"Could not find sensor": sensorId})
@@ -146,7 +147,6 @@ func main() {
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"POST", "GET"},
 		AllowHeaders: []string{"*"},
-		//ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: false,
 	}))
 

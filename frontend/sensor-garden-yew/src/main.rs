@@ -7,8 +7,8 @@ use yew_router::prelude::*;
 mod components;
 use crate::components::{AboutPage, Footer, Header, SensorData, SensorGroup};
 
-// const BACKEND_END_POINT: &str = "https://sgb.cooperkyle.com/getSensorData";
-const BACKEND_END_POINT: &str = "http://127.0.0.1:8085/getSensorData";
+const BACKEND_END_POINT: &str = "https://sgb.cooperkyle.com/getSensorData";
+//const BACKEND_END_POINT: &str = "http://127.0.0.1:8085/getSensorData";
 const HEADER_AUTH: &str = "AUTH-HEADER";
 const HEADER_AUTH_VALUE: &str = "temp value";
 
@@ -42,39 +42,39 @@ fn RequestSensorData() -> Html {
         "ambient_temp",
         "ambient_pressure",
         "soil_temp_plant_1",
-        "soil_temp_plant_2",
+        //"soil_temp_plant_2", // I think this is currently broken
     ];
-    let sens_name_copy = sensor_list[0].to_string();
-    /*let data = use_state(|| vec![SensorData {
-        common_name: "TEST".to_string(),
-        measurment_friendly: "1.0".to_string(),
-        unit_of_measure: "".to_string()
-    }]);*/
     let data = use_state(|| vec![]);
     {
         let data = data.clone();
-        use_effect_with_deps(move |_| {
-            let data = data.clone();
+        use_effect_with_deps(
+            move |_| {
+                let data = data.clone();
                 wasm_bindgen_futures::spawn_local(async move {
-                    let params = [("sensorName", sens_name_copy)];
-                    let fss: RawSensorData = Request::get(BACKEND_END_POINT)
-                        .query(params)
-                        .header(HEADER_AUTH, HEADER_AUTH_VALUE)
-                        .send()
-                        .await
-                        .unwrap()
-                        .json()
-                        .await
-                        .unwrap();
-                    data.set(vec![ 
-                               SensorData {
-                        common_name: fss.SensorName,
-                        measurment_friendly: fss.Measurment.to_string(),
-                        unit_of_measure: fss.Unit.to_string()
-                    }]);
+                    let mut final_result: Vec<SensorData> = Vec::new();
+                    for sensor in sensor_list {
+                        let params = [("sensorId", sensor)];
+                        let fss: RawSensorData = Request::get(BACKEND_END_POINT)
+                            .query(params)
+                            .header(HEADER_AUTH, HEADER_AUTH_VALUE)
+                            .send()
+                            .await
+                            .unwrap()
+                            .json()
+                            .await
+                            .unwrap();
+                        final_result.push(SensorData {
+                            common_name: fss.SensorName,
+                            measurment_friendly: fss.Measurment.to_string(),
+                            unit_of_measure: fss.Unit.to_string(),
+                        });
+                    }
+                    data.set(final_result);
                 });
                 || ()
-            }, ());
+            },
+            (),
+        );
     }
     html! { <SensorGroup sensor_data={(*data).clone()}/>}
 }
