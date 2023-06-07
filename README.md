@@ -16,5 +16,5 @@ Have a look here at some of the live data: https://sensorgarden.cooperkyle.com/
 These are the drivers for the sensors as well as a way to upload the data to the backend. 
 
 ## Future Ideas: 
-- re-write the rpi-drivers (they are a bit old and hard to manage)
+- Rewrite the rpi-drivers (they are a bit old and hard to manage)
 - Add ability to 'water' the garden. I have the hardware to do this, but not the code
